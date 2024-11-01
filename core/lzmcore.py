@@ -73,7 +73,7 @@ def backtomenu_option():
 		
 		if backtomenu == "99":
 			restart_program()
-		elif backtomenu == "00":
+		elif backtomenu == "0" or backtomenu == "00":
 			sys.exit()
 		else:
 			print("\nERROR: Wrong Input")
@@ -312,10 +312,10 @@ def wordpresscan():
 def routersploit():
 	print('\n###### Installing Routersploit')
 	os.system('apt update -y && apt upgrade -y')
-	os.system('apt install python2 git')
-	os.system('python2 -m pip install requests')
+	os.system('apt install python git')
+	os.system('python -m pip install requests')
 	os.system('git clone https://github.com/threat9/routersploit')
-	os.system('mv routersploit {0};cd {0}/routersploit;python2 -m pip install -r requirements.txt;termux-fix-shebang rsf.py'.format(homeDir))
+	os.system('mv routersploit {0};cd {0}/routersploit;python -m pip install -r requirements.txt;termux-fix-shebang rsf.py'.format(homeDir))
 	print('###### Done')
 	backtomenu_option()
 
@@ -380,20 +380,25 @@ def planetwork_ddos():
 	backtomenu_option()
 
 def hydra():
-	print('\n###### Installing Hydra')
-	os.system('apt update -y && apt upgrade -y')
-	os.system('apt install hydra')
-	print('###### Done')
-	backtomenu_option()
+    print('\n###### Installing Hydra')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install tur-repo -y')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install thc-hydra -y')
+    # os.system('git clone https://github.com/vanhauser-thc/thc-hydra')
+    print('###### Done')
+    backtomenu_option()
 
 def black_hydra():
-	print('\n###### Installing Black Hydra')
-	os.system('apt update -y && apt upgrade -y')
-	os.system('apt install hydra git python2')
-	os.system('git clone https://github.com/Gameye98/Black-Hydra')
-	os.system('mv Black-Hydra {}'.format(homeDir))
-	print('###### Done')
-	backtomenu_option()
+    print('\n###### Installing Black Hydra')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install tur-repo git python2 -y')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install thc-hydra -y')
+    os.system('git clone https://github.com/Gameye98/Black-Hydra')
+    os.system('mv Black-Hydra {}'.format(homeDir))
+    print('###### Done')
+    backtomenu_option()
 
 def cupp():
 	print('\n###### Installing Cupp')
@@ -495,13 +500,17 @@ def websploit():
 	backtomenu_option()
 
 def metasploit():
-	print('\n###### Installing Metasploit')
-	os.system("apt update && apt upgrade")
-	os.system("apt install unstable-repo")
-	os.system("cd {} && apt install metasploit".format(homeDir))
-	print('###### Done')
-	print("###### Type 'msfconsole' to start.")
-	backtomenu_option()
+    print('\n###### Installing Metasploit')
+    os.system("apt update -y && apt upgrade -y")
+    os.system("apt install git wget")
+    os.system("wget -O {}/metasploit.sh https://raw.github.com/gushmazuko/metasploit_in_termux/master/metasploit.sh".format(homeDir))
+    oldpwd = os.getenv("PWD")
+    os.chdir(os.getenv("HOME"))
+    os.system("bash metasploit.sh")
+    os.chdir(oldpwd)
+    print('###### Done')
+    print("###### Type 'msfconsole' to start.")
+    backtomenu_option()
 
 def commix():
 	print('\n###### Installing Commix')
@@ -597,6 +606,7 @@ def sudo():
 	backtomenu_option()
 
 def ubuntu():
+	"""
 	print('\n###### Installing Ubuntu')
 	os.system('apt update -y && apt upgrade -y')
 	os.system('apt install python2 git')
@@ -604,13 +614,28 @@ def ubuntu():
 	os.system('mv termux-ubuntu {0} && cd {0}/termux-ubuntu && bash ubuntu.sh'.format(homeDir))
 	print('###### Done')
 	backtomenu_option()
+	"""
+	print('\n###### Installing Ubuntu')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install proot-distro')
+	os.system('proot-distro install ubuntu')
+	print('###### Done')
+	backtomenu_option()
 
 def fedora():
+	"""
 	print('\n###### Installing Fedora')
 	os.system('apt update -y && apt upgrade -y')
 	os.system('apt install wget git')
 	os.system('wget https://raw.githubusercontent.com/nmilosev/termux-fedora/master/termux-fedora.sh')
 	os.system('mv termux-fedora.sh {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+	"""
+	print('\n###### Installing Ubuntu')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install proot-distro')
+	os.system('proot-distro install fedora')
 	print('###### Done')
 	backtomenu_option()
 
@@ -1065,7 +1090,7 @@ def jadx():
 	print("###### Type 'jadx' to start.")
 	backtomenu_option()
 
-def pwnedornot():
+def pwnedOrNot():
 	print('\n###### Installing pwnedOrNot')
 	os.system('apt update -y && apt upgrade -y')
 	os.system('apt install git python')
@@ -1255,12 +1280,21 @@ def parrot():
 	backtomenu_option()
 
 def archlinux():
+	"""
 	print('\n###### Installing Arch Linux')
 	os.system('apt update -y && apt upgrade -y')
 	os.system('apt install git')
 	os.system('cd $HOME && git clone https://github.com/sdrausty/TermuxArch')
 	os.system('cd $HOME && bash TermuxArch/setupTermuxArch.sh')
 	print('###### Done')
+	backtomenu_option()
+	"""
+	print('\n###### Installing Arch Linux')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install proot-distro')
+	os.system('proot-distro install archlinux')
+	print('###### Done')
+	print("###### Type 'proot-distro login archlinux' to start.")
 	backtomenu_option()
 
 def tshark():
@@ -1454,6 +1488,13 @@ def numpy():
 	print("###### Type 'pkg files numpy | grep usr/bin' to check executable file related to numpy package.")
 	backtomenu_option()
 
+def pandas():
+	print('\n###### Installing pandas')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install python-pandas -y')
+	print('###### Done')
+	backtomenu_option()
+
 def userrecon():
 	print('\n###### Installing userrecon')
 	os.system('apt update -y && apt upgrade -y')
@@ -1582,7 +1623,8 @@ def upx():
 def pyinstxtractor():
 	print('\n###### Installing pyinstxtractor')
 	os.system('apt update -y && apt upgrade -y')
-	os.system('apt install git python -y')
+	os.system('apt install ldd git python -y')
+	os.system('python -m pip install pyinstaller')
 	os.system('git clone https://github.com/extremecoders-re/pyinstxtractor')
 	os.system('mv pyinstxtractor {}'.format(homeDir))
 	print('###### Done')
@@ -1591,7 +1633,7 @@ def pyinstxtractor():
 def innoextract():
 	print('\n###### Installing innoextract')
 	os.system('apt update -y && apt upgrade -y')
-	os.system('apt install git clang -y')
+	os.system('apt install ldd doxygen boost boost-headers cmake git clang -y')
 	os.system('git clone https://github.com/dscharrer/innoextract')
 	os.chdir("innoextract")
 	os.system('mkdir -p build')
@@ -1975,6 +2017,255 @@ def pyrit():
 	print('###### Done')
 	backtomenu_option()
 
+def sn1per():
+	print('\n###### Installing Sn1per')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python -y')
+	os.system('git clone https://github.com/1N3/Sn1per')
+	os.chdir("Sn1per")
+	os.system("bash install.sh")
+	os.chdir("..")
+	os.system('mv Sn1per {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def sublist3r():
+	print('\n###### Installing Sublist3r')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python -y')
+	os.system('python -m pip install argparse dnspython requests')
+	os.system('git clone https://github.com/aboul3la/Sublist3r')
+	os.system('mv Sublist3r {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def wppluginscanner():
+	print('\n###### Installing WP-plugin-scanner')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python2 -y')
+	os.system('git clone https://github.com/mintobit/WP-plugin-scanner')
+	os.system('mv WP-plugin-scanner {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def whatweb():
+	print('\n###### Installing WhatWeb')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python -y')
+	os.system('git clone https://github.com/urbanadventurer/WhatWeb')
+	os.system('mv WhatWeb {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def zerodoor():
+	print('\n###### Installing Zerodoor')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git gcc nmap-ncat python2 -y')
+	os.system('git clone https://github.com/Souhardya/Zerodoor')
+	os.system('mv Zerodoor {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def brutespray():
+	print('\n###### Installing brutespray')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python -y')
+	os.system('python -m pip install argcomplete==1.10.0')
+	os.system('git clone https://github.com/x90skysn3k/brutespray')
+	os.system('mv brutespray {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+
+def pycdc():
+	print('\n###### Installing pycdc')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python clang cmake make -y')
+	os.system('git clone https://github.com/zrax/pycdc')
+	os.system('mv pycdc {}'.format(homeDir))
+	os.chdir(homeDir)
+	os.chdir("pycdc")
+	os.system('cmake .')
+	os.system('make')
+	os.system('make check')
+	os.chdir(current_dir)
+	print('###### Done')
+	backtomenu_option()
+
+def apkid():
+	print('\n###### Installing APKiD')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install python yara yara-static -y')
+	os.system('python -m pip install apkid')
+	print('###### Done')
+	print("###### Type 'apkid' to start.")
+	backtomenu_option()
+
+def dtlx():
+	print('\n###### Installing DTL-X')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install python git apktool apksigner openjdk-17 -y')
+	os.system('python -m pip install loguru')
+	os.system('git clone https://github.com/Gameye98/DTL-X')
+	os.system('mv DTL-X {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def crowbar():
+	print('\n###### Installing crowbar')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python -y')
+	os.system('python -m pip install paramiko==2.7.1')
+	os.system('git clone https://github.com/galkan/crowbar')
+	os.system('mv crowbar {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def voidLinux():
+	print('\n###### Installing Void Linux')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install proot-distro')
+	os.system('proot-distro install void')
+	print("###### Type 'proot-distro login void' to start.")
+	print('###### Done')
+	backtomenu_option()
+
+def apkleaks():
+    print('\n###### Installing APKLeaks')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install libxslt libxslt-static libxml2 libxml2-python libxml2-static libxml2-utils -y')
+    os.system('apt install python -y')
+    if not os.path.isfile(os.getenv("PREFIX")+"/bin/jadx"):
+        os.system('apt install dpkg wget -y')
+        os.system('wget https://raw.githubusercontent.com/Lexiie/Termux-Jadx/master/jadx-0.6.1_all.deb')
+        os.system('dpkg -i jadx-0.6.1_all.deb')
+        os.system('rm -rf jadx-0.6.1_all.deb')
+    os.system('python -m pip install setuptools')
+    os.system('python -m pip install apkleaks')
+    print('###### Done')
+    print("###### Type 'apkleaks' to start.")
+    print("###### Usage: apkleaks -f /path/file.apk")
+    backtomenu_option()
+
+def apkmitm():
+	print('\n###### Installing apk-mitm')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install nodejs apktool -y')
+	os.system('npm i -g apk-mitm')
+	open(os.getenv("HOME")+"/.bashrc","a").write("\nalias apk-mitm=\"apk-mitm --apktool $PREFIX/share/java/apktool.jar\"\n")
+	print('###### Done')
+	print("###### Type 'apk-mitm' to start.")
+	print("###### Usage: apk-mitm /path/file.apk")
+	backtomenu_option()
+
+def ssl_pinning_remover():
+	print('\n###### Installing ssl_pinning_remover')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install python -y')
+	os.system('python -m pip install ssl-pinning-remover')
+	print('###### Done')
+	print("###### Type 'ssl_pinning_remover' to start.")
+	print("###### Usage: ssl_pinning_remover -i /path/file.apk -v")
+	backtomenu_option()
+
+def elpscrk():
+	print('\n###### Installing elpscrk')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python2 -y')
+	os.system('python2 -m pip install colorama~=0.4.4 psutil~=5.8.0 click~=8.0.1 phonenumbers~=8.12.27')
+	os.system('git clone https://github.com/D4Vinci/elpscrk')
+	os.system('mv elpscrk {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def evilginx():
+	print('\n###### Installing evilginx')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git nginx python2 -y')
+	os.system('git clone https://github.com/kgretzky/evilginx')
+	os.system('mv evilginx {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def fbht():
+	print('\n###### Installing fbht')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python2 -y')
+	os.system('apt install python2-numpy')
+	os.system('python2 -m pip install mechanize')
+	os.system('git clone https://github.com/chinoogawa/fbht')
+	os.system('mv fbht {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def fierce():
+	print('\n###### Installing fierce')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python2 -y')
+	os.system('python2 -m pip install dnspython==1.16.0 fierce')
+	print('###### Done')
+	print("###### Usage: fierce -h")
+	backtomenu_option()
+
+def fuxploider():
+	print('\n###### Installing fuxploider')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python -y')
+	os.system('python -m pip install requests coloredlogs bs4')
+	os.system('git clone https://github.com/almandin/fuxploider')
+	os.system('mv fuxploider {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def gasmask():
+	print('\n###### Installing gasmask')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python2 -y')
+	os.system('python2 -m pip install validators python-whois dnspython requests shodan censys')
+	os.system('git clone https://github.com/twelvesec/gasmask')
+	os.system('mv gasmask {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def ghostphisher():
+	print('\n###### Installing ghost-phisher')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install git python2 -y')
+	os.system('git clone https://github.com/savio-code/ghost-phisher')
+	os.system('mv ghost-phisher {}'.format(homeDir))
+	print('###### Done')
+	backtomenu_option()
+
+def gef():
+	print('\n###### Installing GEF')
+	os.system('apt update -y && apt upgrade -y')
+	os.system('apt install gdb wget -y')
+	os.system('bash -c "$(wget https://gef.blah.cat/sh -O -)"')
+	print('###### Done')
+	backtomenu_option()
+
+def osi_ig():
+    print('\n###### Installing osi.ig')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install git python wget -y')
+    os.system('git clone https://github.com/th3unkn0n/osi.ig')
+    os.chdir("osi.ig")
+    os.system('python -m pip -r requirements.txt')
+    os.chdir("..")
+    os.system('mv osi.ig {}'.format(homeDir))
+    print('###### Done')
+    backtomenu_option()
+
+def proxy_checker():
+    print('\n###### Installing proxy-checker')
+    os.system('apt update && apt upgrade -y')
+    os.system('apt install git python -y')
+    os.system('python -m pip install colorama requests')
+    os.system('git clone https://github.com/pythonism/proxy-checker')
+    os.system('mv proxy-checker {}'.format(homeDir))
+    print('###### Done')
+    backtomenu_option()
+
 ### Compiler/Interpreter
 def python2():
 	print('\n###### Installing Python2')
@@ -2095,6 +2386,16 @@ def nasm():
 	print('###### Done')
 	print("###### Type 'nasm' to start.")
 	backtomenu_option()
+
+def notebook():
+    print('\n###### Installing jupyter-notebook')
+    os.system('apt update -y && apt upgrade -y')
+    os.system('apt install libzmq libcrypt rust')
+    os.system('python -m pip install -U pip prompt prompt_toolkit pickleshare openpyxl')
+    os.system('apt install python python-numpy python-pandas matplotlib -y')
+    os.system('python -m pip install notebook')
+    print('###### Done')
+    backtomenu_option()
 
 ### termux games
 def street_car():
